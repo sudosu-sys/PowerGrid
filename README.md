@@ -37,11 +37,11 @@ PowerGrid automates grade tracking, calculates averages, and generates reports i
 ## Installation 🛠️
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/powergrid.git
+   git clone https://github.com/sudosu-sys/PowerGrid.git
    ```
 2. Go to the project directory:
    ```bash
-   cd powergrid
+   cd PowerGrid
    ```
 3. Create and activate a virtual environment:
    ```bash
