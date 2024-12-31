@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<h2 class="mb-4">{{ student.first_name }} {{ student.last_name }}</h2>
+
+<h3 class="mb-3">Grade 10 Math Grades:</h3>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Date</th>
+        <th>Grade</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for grade in student.math_grade_10_set.all %}
+        <tr>
+          <td>{{ grade.date }}</td>
+          <td>{{ grade.grade }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="2">No grades available.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+  {{ average }}

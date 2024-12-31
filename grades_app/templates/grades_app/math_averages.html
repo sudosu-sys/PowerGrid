@@ -1,0 +1,128 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="nTek">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Student · Grades</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'grades_app/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'grades_app/all.css' %}">
+    <style>
+        .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <h1 class="navbar-brand h1" href="#">Math</h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    {% for grade_level in grade_levels %}
+                    <li style="padding-left: 5px; padding-bottom: 3px;" class="nav-item">
+                        <a class="btn btn-outline-light" aria-current="page" href="{% url 'grades_app:math_average' grade_level=grade_level %}">Grade {{ grade_level }}</a>
+                    </li>
+                    {% endfor %}
+                    <div style="padding-left: 5px; padding-bottom: 3px;" class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle btn btn-outline-success" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-file-csv"></i> Report
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                                    <li>
+                                        <h6 class="dropdown-header">Generate Report</h6>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="{% url 'grades_app:math_generate_report' 9 %}">Grade 9</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'grades_app:math_generate_report' 10 %}">Grade 10</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'grades_app:math_generate_report' 11 %}">Grade 11</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'grades_app:math_generate_report' 12 %}">Grade 12</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="padding-left: 5px; padding-bottom: 3px;" class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle btn btn-outline-primary" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-user-circle"></i> {{ request.user.username | title }}</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                                    <li>
+                                        <h6 class="dropdown-header">User actions</h6>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="{% url 'admin:index' %}"><i class="fa fa-database"></i> Panel</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'password_change' %}"><i class="fa fa-lock"></i> Change Password</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+         <div class="bg-light p-5 rounded"> 
+            
+         </div> 
+    </main>
+            <h2 style="text-align:center;" class="mt-1"><strong>Grade {{ grade_level }}</strong></h2>
+
+    <div class="bd-cheatsheet container-fluid bg-body">
+        <article class="my-3" id="tables">
+            <div>
+                <div class="bd-example">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="table-dark" scope="col">First Name</th>
+                                <th class="table-dark" scope="col">Last Name</th>
+                                <th class="table-dark" scope="col">Average Math Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in student_grades_list %}
+                            <tr>
+                                {% for value in student %}
+                                {# <th scope="row">Default</th> #}
+                                <td>{{ value }}</td>
+                            {% endfor %}    
+                            </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <script src="{% static 'grades_app/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

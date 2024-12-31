@@ -1,0 +1,82 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="nTek">
+        <title>Welcome</title>
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
+        <!-- Bootstrap and other core CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'grades_app/bootstrap.min.css' %}">
+        <!-- <link rel="stylesheet" type="text/css" href="{% static 'grades_app/font-awesome.min.css' %}"> -->
+        <link rel="stylesheet" type="text/css" href="{% static 'grades_app/all.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'grades_app/all.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'grades_app/brands.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'grades_app/brands.min.css' %}">
+        <!-- <link rel="stylesheet" type="text/css" href="{% static 'grades_app/delete.css' %}"> -->
+        
+        <style>
+        .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        }
+        @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+        }
+        }
+        </style>
+        <!-- Custom styles for this template -->
+        <link href="{% static 'grades_app/cover.css' %}" rel="stylesheet">
+    </head>
+    <body class="d-flex h-100 text-center text-white bg-dark">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <header class="mb-auto">
+                <div>
+                    {# <h3 class="float-md-start mb-0"><i class="fa fa-bolt"></i> PowerGrid</h3> #}
+                    <h3 class="float-md-start mb-0"><img style="width: 30px; height: 60px" src="{% static 'grades_app/icon.ico' %}"></h3>
+
+                    <nav class="nav nav-masthead justify-content-center float-md-end">
+                        {% if user.is_authenticated %}
+                            <a class="nav-link" href=""><i class="fas fa-user-circle" aria-hidden="true"></i>
+                            {{ request.user }}</a>
+                            <a class="nav-link active" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                            Logout</a>
+                            {% if user.is_staff %}
+                                <a class="nav-link active" href="{% url 'admin:index' %}"><i class="fa fa-database" aria-hidden="true"></i>
+                                Panel</a>
+                                
+                                {% if in_math_group %}
+                                    <a class="nav-link active" href="{% url 'grades_app:math_average' 9%}"><i class="fa fa-percent" aria-hidden="true"></i> Averages</a>
+                                    {% elif in_english_group %}
+                                    <a class="nav-link active" href="{% url 'grades_app:english_average' 9%}"><i class="fa fa-percent" aria-hidden="true"></i> Averages</a>
+                                {% endif %}
+                                {% elif not user.is_staff %}
+                                <a class="nav-link active" href="{% url 'grades_app:subject_grades' %}"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Grades</a>
+                            {% endif %}
+                        {% else %}
+                            <a class="nav-link active" href="{% url 'login' %}"><i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login</a>
+                        {% endif %}
+                    </nav>
+                </div>
+            </header>
+            <main class="px-3">
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="100" height="100">
+                    <path fill="#ffffff" d="M296 160H180.6l42.6-129.8C227.2 15 215.7 0 200 0H56C44 0 33.8 8.9 32.2 20.8l-32 240C-1.7 275.2 9.5 288 24 288h118.7L96.6 482.5c-3.6 15.2 8 29.5 23.3 29.5 8.4 0 16.4-4.4 20.8-12l176-304c9.3-15.9-2.2-36-20.7-36z" /></svg> -->
+
+                    <img style="margin-top: 16px;" src="{% static 'grades_app/logo.png' %}">
+                    <h1 style="font-size: 40px;">Welcome to <strong>PowerGrid</strong>!</h1>
+                    <p style="font-size: 20px;" class="lead">Powergrid is a one-for-all CMS for making your life as a teacher super easy. Focus on teaching and let PowerGrid do the rest. So why the lag? Login and explore PowerGrid at work!</p>
+                </main>
+                <footer class="mt-auto text-white-50">
+                    <p><i class="fa fa-copyright" aria-hidden="true"></i>
+                    nTek 2024</p>
+                </footer>
+            </div>
+        </body>
+    </html>

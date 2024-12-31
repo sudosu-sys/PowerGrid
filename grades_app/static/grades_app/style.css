@@ -1,0 +1,13 @@
+.navbar-brand {
+	padding: 5px;
+	
+}
+
+.nav-link {
+	padding-right: 20px;
+}
+.nav-link:hover {
+	padding-right: 20px;
+	font-weight: 700;
+}
+

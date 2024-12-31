@@ -1,0 +1,377 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="nTek">
+    <title>Grades</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'grades_app/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'grades_app/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'grades_app/font-awesome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'grades_app/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'grades_app/all.css' %}">
+
+
+
+
+    <style>
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+    }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'grades_app/cheatsheet.css' %}" rel="stylesheet">
+    <script src="{% static 'grades_app/navbar.css' %}"></script>
+
+</head>
+
+<body class="bg-light">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+     <a class="navbar-brand" href="#">{{ student.first_name }} {{ student.last_name }}</a> 
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        
+        
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-user-circle"></i> Account
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <li><a class="dropdown-item" href="{% url 'password_change' %}"><i class="fa fa-lock"></i> Change Password</a></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout</a></li>
+            </ul>
+          </li>
+        
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+    
+    <div class="bd-cheatsheet container-fluid bg-body">
+        <section id="content">
+            <article class="my-3" id="tables">
+                <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+                </div>
+                <div>
+                    <div class="bd-example">
+
+
+                        <h3 style="text-align: center; margin-top: 80px;"><strong>Math Grades</strong></h3>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="table-dark" scope="col"><i class="fa fa-calendar"></i> Date</th>
+                                    <th class="table-dark" scope="col"><i class="fa fa-hashtag"></i> Grade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% if student.grade_level == 10 %}
+                                {% for grade in math_grades_10 %}
+                                  {% if grade.grade < 70 %}
+                                  <tr class="table-danger">
+                                      <td scope="row">{{ grade.date }}</td>
+                                      <th>{{ grade.grade }}</th>
+                                  </tr>
+                                  {% elif grade.grade < 85 and grade.grade > 70%}
+                                  <tr class="table-warning">
+
+                                      <td scope="row">{{ grade.date }}</td>
+                                      <th>{{ grade.grade }}</th>
+                                  </tr>
+                                  {% elif grade.grade > 85 %}
+                                  <tr class="table-success">
+                                      <td scope="row">{{ grade.date }}</td>
+                                      <th>{{ grade.grade }}</th>
+                                  </tr>
+                                  {% endif %}
+                                 {% endfor %} 
+                              {% endif %}
+                                
+                            </tbody>
+
+                            <tbody>
+                              {% if student.grade_level == 9 %}
+                                {% for grade in math_grades_9 %}
+                                  {% if grade.grade < 70 %}
+                                  <tr class="table-danger">
+                                      <td scope="row">{{ grade.date }}</td>
+                                      <th>{{ grade.grade }}</th>
+                                  </tr>
+                                  {% elif grade.grade < 85 and grade.grade > 70%}
+                                  <tr class="table-warning">
+                                      <td scope="row">{{ grade.date }}</td>
+                                      <th>{{ grade.grade }}</th>
+                                  </tr>
+                                  {% elif grade.grade > 85 %}
+                                  <tr class="table-success">
+                                      <td scope="row">{{ grade.date }}</td>
+                                      <th>{{ grade.grade }}</th>
+                                  </tr>
+                                  {% endif %}
+                                 {% endfor %} 
+                              {% endif %}
+                                
+                            </tbody>
+                        </table>
+
+                        
+
+                        <h3 style="text-align: center; margin-top: 80px;"><strong>English Grades</strong></h3>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="table-dark" scope="col"><i class="fa fa-calendar"></i> Date</th>
+                                    <th class="table-dark" scope="col"><i class="fa fa-hashtag"></i> Grade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% if student.grade_level == 10 %}
+                                {% for grade in english_grades_10 %}
+
+                                  {% if grade.grade < 70 %}
+                                  <tr class="table-danger">
+                                      <td scope="row">{{ grade.date }}</td>
+                                      <th>{{ grade.grade }}</th>
+                                  </tr>
+                                  {% elif grade.grade < 85 and grade.grade > 70%}
+                                  <tr class="table-warning">
+                                      <td scope="row">{{ grade.date }}</td>
+                                      <th>{{ grade.grade }}</th>
+                                  </tr>
+                                  {% elif grade.grade > 85 %}
+                                  <tr class="table-success">
+                                      <td scope="row">{{ grade.date }}</td>
+                                      <th>{{ grade.grade }}</th>
+                                  </tr>
+                                  {% endif %}
+                                 {% endfor %} 
+                              {% endif %}
+                                 
+                            </tbody>
+
+                            <tbody>
+                              {% if student.grade_level == 9 %}
+                                {% for grade in english_grades_9 %}
+
+                                  {% if grade.grade < 70 %}
+                                  <tr class="table-danger">
+                                      <td scope="row">{{ grade.date }}</td>
+                                      <th>{{ grade.grade }}</th>
+                                  </tr>
+                                  {% elif grade.grade < 85 and grade.grade > 70%}
+                                  <tr class="table-warning">
+                                      <td scope="row">{{ grade.date }}</td>
+                                      <th>{{ grade.grade }}</th>
+                                  </tr>
+                                  {% elif grade.grade > 85 %}
+                                  <tr class="table-success">
+                                      <td scope="row">{{ grade.date }}</td>
+                                      <th>{{ grade.grade }}</th>
+                                  </tr>
+                                  {% endif %}
+                                 {% endfor %} 
+                              {% endif %}
+                                
+                            </tbody>
+
+                            
+                        </table>
+
+
+<h3 style="text-align: center; margin-top: 80px;"><strong><u>Averages</u></strong></h3>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        
+{% if student.grade_level == 9 %}
+<div class="col-sm-6 col-lg-4 mb-4">
+    {% if math_average_9 < 70 %}
+    <div class="card bg-danger text-white text-center p-3">
+        <figure class="mb-0">
+            <blockquote class="blockquote">
+                <p>Math Average</p>
+            </blockquote>
+            <blockquote class="blockquote mb-0 text-white">
+                {{ math_average_9 }}
+            </blockquote>
+        </figure>
+    </div>
+    {% elif math_average_9 < 85 and math_average_9 > 70 %}
+    <div style="background-color: #e8be40;" class="card text-center p-3">
+        <figure class="mb-0">
+            <blockquote class="blockquote">
+                <p style="color: black;">Math Average</p>
+            </blockquote>
+            <blockquote style="background-color: #e8be40;" class="blockquote mb-0">
+                {{ math_average_9 }}
+            </blockquote>
+        </figure>
+    </div>
+    {% elif math_average_9 > 85 %}
+    <div class="card bg-success text-white text-center p-3">
+        <figure class="mb-0">
+            <blockquote class="blockquote">
+                <p>Math Average</p>
+            </blockquote>
+            <blockquote class="blockquote mb-0 text-white">
+                {{ math_average_9 }}
+            </blockquote>
+        </figure>
+    </div>
+    {% endif %}
+</div>
+
+<div class="col-sm-6 col-lg-4 mb-4">
+    {% if english_average_9 < 70 %}
+    <div class="card bg-primary text-white text-center p-3">
+        <figure class="mb-0">
+            <blockquote class="blockquote">
+                <p>English Average</p>
+            </blockquote>
+            <blockquote class="blockquote mb-0 text-white">
+                {{ english_average_9 }}
+            </blockquote>
+        </figure>
+    </div>
+    {% elif english_average_9 < 85 and english_average_9 > 70 %}
+    <div style="background-color: #e8be40;" class="card text-white text-center p-3">
+        <figure class="mb-0">
+            <blockquote class="blockquote">
+                <p style="color: black;">English Average</p>
+            </blockquote>
+            <blockquote style="color: black;" class="blockquote mb-0">
+                {{ english_average_9 }}
+            </blockquote>
+        </figure>
+    </div>
+    {% elif english_average_9 > 85 %}
+    <div class="card bg-success text-white text-center p-3">
+        <figure class="mb-0">
+            <blockquote class="blockquote">
+                <p>English Average</p>
+            </blockquote>
+            <blockquote class="blockquote mb-0 text-white">
+                {{ english_average_9 }}   
+            </blockquote>
+        </figure>
+    </div>
+    {% endif %}
+
+</div>
+
+{% elif student.grade_level == 10 %}
+<div class="col-sm-6 col-lg-4 mb-4">
+    {% if math_average_10 < 70 %}
+    <div class="card bg-danger text-white text-center p-3">
+        <figure class="mb-0">
+            <blockquote class="blockquote">
+                <p>Math Average</p>
+            </blockquote>
+            <blockquote class="blockquote mb-0 text-white">
+                {{ math_average_10 }}
+            </blockquote>
+        </figure>
+    </div>
+    {% elif math_average_10 < 85 and math_average_10 > 70 %}
+    <div style="background-color: #e8be40;" class="card text-center p-3">
+        <figure class="mb-0">
+            <blockquote class="blockquote">
+                <p style="color: black;">Math Average</p>
+            </blockquote>
+            <blockquote style="background-color: #e8be40;" class="blockquote mb-0">
+                {{ math_average_10 }}
+            </blockquote>
+        </figure>
+    </div>
+    {% elif math_average_10 > 85 %}
+    <div class="card bg-success text-white text-center p-3">
+        <figure class="mb-0">
+            <blockquote class="blockquote">
+                <p>Math Average</p>
+            </blockquote>
+            <blockquote class="blockquote mb-0 text-white">
+                {{ math_average_10 }}
+            </blockquote>
+        </figure>
+    </div>
+    {% endif %}
+</div>
+
+<div class="col-sm-6 col-lg-4 mb-4">
+    {% if english_average_10 < 70 %}
+    <div class="card bg-danger text-white text-center p-3">
+        <figure class="mb-0">
+            <blockquote class="blockquote">
+                <p>English Average</p>
+            </blockquote>
+            <blockquote class="blockquote mb-0 text-white">
+                {{ english_average_10 }}
+            </blockquote>
+        </figure>
+    </div>
+    {% elif english_average_10 < 85 and english_average_10 > 70 %}
+    <div style="background-color: #e8be40;" class="card text-white text-center p-3">
+        <figure class="mb-0">
+            <blockquote class="blockquote">
+                <p style="color: black;">English Average</p>
+            </blockquote>
+            <blockquote style="color: black;" class="blockquote mb-0">
+                {{ english_average_10 }}
+            </blockquote>
+        </figure>
+    </div>
+    {% elif english_average_10 > 85 %}
+    <div class="card bg-success text-white text-center p-3">
+        <figure class="mb-0">
+            <blockquote class="blockquote">
+                <p>English Average</p>
+            </blockquote>
+            <blockquote class="blockquote mb-0 text-white">
+                {{ english_average_10 }}   
+            </blockquote>
+        </figure>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endif %}
+
+
+</div>
+</div>
+</div>
+</div>
+
+                    </div>
+                </div>
+            </article>
+        </section>
+    </div>
+    <script src="{% static 'grades_app/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'grades_app/cheatsheet.js' %}"></script>
+
+</body>
+
+</html>

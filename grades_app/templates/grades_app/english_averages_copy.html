@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Grades</title>
+</head>
+<link rel="stylesheet" type="text/css" href="{% static 'grades_app/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'grades_app/all.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'grades_app/all.min.css' %}"> -->
+
+<body class="container">
+    <h1>English Averages</h1>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="bd-example">
+                    {% for grade_level in grade_levels %}
+                    <a class="btn btn-outline-light" href="{% url 'grades_app:english_average' grade_level=grade_level %}">Grade {{ grade_level }}</a>
+                    {% endfor %}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary"><i class="fas fa-file-csv" aria-hidden="true"></i> Report</button>
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'grades_app:english_generate_report' 9 %}">Grade 9</a></li>
+                            <li><a class="dropdown-item" href="{% url 'grades_app:english_generate_report' 10 %}">Grade 10</a></li>
+                            <li><a class="dropdown-item" href="{% url 'grades_app:english_generate_report' 11 %}">Grade 11</a></li>
+                            <li><a class="dropdown-item" href="{% url 'grades_app:english_generate_report' 12 %}">Grade 12</a></li>
+                        </ul>
+                    </div>
+                    <!-- <a class="btn btn-danger" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout</a> -->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary"><i class="fa fa-user-circle" aria-hidden="true"></i> {{ request.user.username }}</button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'admin:index' %}"><i class="fa fa-database"></i> Panel</a></li>
+                            <li><a class="dropdown-item" href="{% url 'password_change' %}"><i class="fa fa-lock"></i> Change Password</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+            </div>
+            
+            
+
+        </div>
+    </nav>
+    <h2 style="text-align:center;" class="mt-4"><strong>Grade {{ grade_level }}</strong></h2>
+    <div class="bd-cheatsheet container-fluid bg-body">
+        <section id="content">
+            <article class="my-3" id="tables">
+                <div>
+                    <div class="bd-example">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="table-dark">First Name</th>
+                                    <th class="table-dark">Last Name</th>
+                                    <th class="table-dark">Average English Grade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for student in student_grades_list %}
+                                <tr>
+                                    {% for value in student %}
+                                    <td>{{ value }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </div>
+</body>
+<script src="{% static 'grades_app/bootstrap.bundle.min.js' %}"></script>
+
+</html>

@@ -1,0 +1,12 @@
+div.book-pic {
+    display: flex;
+    justify-content: center;
+}
+img {
+	border-radius: 12px;
+}
+
+.index-header {
+    color: white;
+    text-align: center;
+}
